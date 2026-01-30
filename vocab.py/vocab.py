@@ -9,21 +9,21 @@ try:
             if ":" in line:
                 key, value = line.strip().split(":")
                 words_dict[key] = value
-    print(f"Perfect ✅ {name}! تم تحميل {len(words_dict)} كلمة من ملفك.")
-except:
-    print(f"Perfect ✅ {name}! نبدأ قاموس جديد ")
+    print(f"Perfect ✅ {name}! {len(words_dict)} words loaded from your dictionary.")
+except FileNotFoundError:
+    print(f"Perfect ✅ {name}! Starting a new dictionary.")
 
 while True:
     print("\n" + "=" * 40)
-    action = input("Type (add) لزيادة كلمة, (test) للاختبار, (show) للعرض, (search) للبحث, (exit) للخروج: ").lower()
+    action = input("Type (add), (test), (show), (search), or (exit) to quit: ").lower()
 
     if action == 'exit':
-        print(f"👋 مع السلامة يا {name.upper()}!.")
+        print(f"👋 Goodbye {name.upper()}! Keep practicing.")
         break
 
     elif action == 'add':
         word = input("Enter German word: ")
-        meaning = input("Enter Arabic meaning: ")
+        meaning = input("Enter meaning (English/Arabic): ")
         words_dict[word] = meaning
 
         with open("dictionary.txt", "a", encoding="utf-8") as file:
@@ -37,33 +37,33 @@ while True:
         else:
             rank = "German Legend 🏆"
 
-        print(f" تم الحفظ! مستواك الحالي: {rank}")
+        print(f"Saved! Current Rank: {rank}")
 
     elif action == 'show':
         if not words_dict:
-            print(" القاموس لسه فاضي!")
+            print("Your dictionary is empty!")
         else:
-            print("\n📖 كلماتك المحفوظة:")
+            print("\n📖 Your Saved Words:")
             for g, a in words_dict.items():
-                print(f"{g} : {a}")
+                print(f"🇩🇪 {g} : {a}")
 
     elif action == 'search':
-        target = input(" اكتب الكلمة اللي بتدور عليها: ")
+        target = input("Enter the word you are looking for: ")
         if target in words_dict:
-            print(f"✅ لقيناها: {target} معناها بالعربي {words_dict[target]}")
+            print(f"✅ Found: {target} means {words_dict[target]}")
         else:
-            print("❌ الكلمة دي مش موجودة في قاموسك.")
+            print("❌ Word not found in your dictionary.")
 
     elif action == 'test':
         if words_dict:
             q = random.choice(list(words_dict.keys()))
-            ans = input(f"شو معنى كلمة '{q}'؟ ")
+            ans = input(f"What is the meaning of '{q}'? ")
             if ans == words_dict[q]:
-                print(f"\n⭐ PERFECT {name.upper()}! إجابة صحيحة 🏆")
+                print(f"\n⭐ PERFECT {name.upper()}! Correct answer 🏆")
             else:
-                print(f"\n❌ للاسف غلط! المعنى الصح هو: {words_dict[q]}")
+                print(f"\n❌ Incorrect! The correct meaning is: {words_dict[q]}")
         else:
-            print(" لازم تضيف كلمات الأول عشان نختبرك!")
+            print("Add some words first before taking a test!")
 
     else:
-        print(" اختيار غير صحيح، حاول تاني.")
+        print("Invalid option, please try again.")
