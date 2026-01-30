@@ -1,0 +1,1 @@
+German Vocabulary App A Python-based interactive tool designed to help users master German vocabulary with Arabic translations. Features a clean CLI interface for efficient daily practice and word memorization.
